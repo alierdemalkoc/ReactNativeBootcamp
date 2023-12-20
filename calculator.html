@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hesap Makinesi</title>
+</head>
+<body>
+
+  <h2>Çarpma, Bölme, Toplama ve Çıkarma Hesap Makinesi</h2>
+
+  <label for="inputNumber1">1. Sayıyı Girin:</label>
+  <input type="text" id="inputNumber1" placeholder="Sayıyı girin">
+
+  <label for="inputNumber2">2. Sayıyı Girin:</label>
+  <input type="text" id="inputNumber2" placeholder="Sayıyı girin">
+
+  <button onclick="performOperation('add')">Topla</button>
+  <button onclick="performOperation('subtract')">Çıkar</button>
+  <button onclick="performOperation('multiply')">Çarp</button>
+  <button onclick="performOperation('divide')">Böl</button>
+
+  <div id="resultContainer"></div>
+
+  <hr>
+
+  <h2>Sayıyı 1.8 ile Çarp ve Sonucu Göster</h2>
+
+  <label for="inputNumber">Sayıyı Girin:</label>
+  <input type="text" id="inputNumber" placeholder="Sayıyı girin">
+
+  <button onclick="multiplyAndShowResult()">Hesapla</button>
+
+  <div id="resultContainerMultiply"></div>
+
+  <script>
+    function performOperation(operation) {
+      const inputElement1 = document.getElementById('inputNumber1');
+      const inputElement2 = document.getElementById('inputNumber2');
+      const number1 = parseFloat(inputElement1.value);
+      const number2 = parseFloat(inputElement2.value);
+
+      if (!isNaN(number1) && !isNaN(number2)) {
+        let result;
+
+        switch (operation) {
+          case 'add':
+            result = number1 + number2;
+            break;
+          case 'subtract':
+            result = number1 - number2;
+            break;
+          case 'multiply':
+            result = number1 * number2;
+            break;
+          case 'divide':
+            if (number2 !== 0) {
+              result = (number1 / number2).toFixed(5);
+            } else {
+              alert('Bölme işlemi sıfıra bölme hatası!');
+              return;
+            }
+            break;
+          default:
+            alert('Geçersiz işlem!');
+            return;
+        }
+
+        const resultContainer = document.getElementById('resultContainer');
+        resultContainer.innerHTML = `Sonuç: ${result}`;
+      } else {
+        alert('Lütfen geçerli sayı değerleri girin.');
+      }
+    }
+
+    function multiplyAndShowResult() {
+      const inputElement = document.getElementById('inputNumber');
+      const inputValue = inputElement.value;
+
+      if (!isNaN(inputValue) && inputValue !== '') {
+        const result = parseFloat(inputValue) * 1.8;
+        const resultContainerMultiply = document.getElementById('resultContainerMultiply');
+        resultContainerMultiply.innerHTML = `Sonuç: ${result}`;
+      } else {
+        alert('Geçersiz Değer');
+      }
+    }
+  </script>
+
+</body>
+</html>
